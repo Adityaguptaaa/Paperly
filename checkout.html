@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Paperly</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">📚 Paperly</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="checkout-section">
+    <h2>🧾 Order Summary</h2>
+    <div id="billContainer"></div>
+    <h3 id="billTotal"></h3>
+
+    <h2>🏠 Shipping Address</h2>
+    <form id="checkoutForm" onsubmit="return confirmOrder()">
+      <input type="text" id="fullName" placeholder="Full Name" required /><br/>
+      <input type="text" id="address" placeholder="Address" required /><br/>
+      <input type="text" id="city" placeholder="City" required /><br/>
+      <input type="text" id="pincode" placeholder="Pincode" required pattern="[0-9]{6}" /><br/>
+      <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}" /><br/><br/>
+
+      <h2>💳 Choose Payment Method</h2>
+      <label><input type="radio" name="payment" value="cod" checked /> Cash on Delivery</label><br/>
+      <label><input type="radio" name="payment" value="upi" /> UPI</label><br/>
+      <label><input type="radio" name="payment" value="card" /> Debit/Credit Card</label><br/><br/>
+
+      <button type="submit">✅ Confirm Order</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Paperly. Built with ❤️ by Aditya.</p>
+  </footer>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function showBill() {
+      const billDiv = document.getElementById("billContainer");
+      const totalBox = document.getElementById("billTotal");
+
+      if (cart.length === 0) {
+        billDiv.innerHTML = "<p>Your cart is empty.</p>";
+        totalBox.textContent = "";
+        return;
+      }
+
+      let total = 0;
+      billDiv.innerHTML = `
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th style="text-align:left;">Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${cart.map(item => {
+              const subtotal = item.qty * item.price;
+              total += subtotal;
+              return `
+                <tr>
+                  <td>${item.name}</td>
+                  <td style="text-align:center;">${item.qty}</td>
+                  <td style="text-align:center;">₹${item.price}</td>
+                  <td style="text-align:right;">₹${subtotal}</td>
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      `;
+      totalBox.textContent = `Total Amount Payable: ₹${total}`;
+    }
+
+    function confirmOrder() {
+      const name = document.getElementById("fullName").value;
+      const address = document.getElementById("address").value;
+      const city = document.getElementById("city").value;
+      const pincode = document.getElementById("pincode").value;
+      const phone = document.getElementById("phone").value;
+      const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+      const shipping = { name, address, city, pincode, phone };
+      localStorage.setItem("shippingAddress", JSON.stringify(shipping));
+
+      const orderDetails = {
+        ...shipping,
+        payment: paymentMethod,
+        cart
+      };
+
+      // ✅ ✅ Replace this URL with your deployed Apps Script Web App URL
+      fetch("https://script.google.com/macros/s/AKfycbzP6ByQlroHPb-1BeF3Ii1W3S8xXPk4xJVnV7a02tFWyVRW2nSTvcz80ofhGUspcfmX_Q/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(orderDetails)
+})
+.then(res => res.json())
+.then(res => {
+  alert("✅ Order sent to Google Sheet!");
+  localStorage.removeItem("cart");
+  window.location.href = "index.html";
+})
+.catch(err => {
+  console.error("Error sending to sheet:", err.message || err);
+  alert("❌ Failed to place order. Please check your network or script URL.");
+});
+
+
+    }
+
+    function prefillAddress() {
+      const saved = JSON.parse(localStorage.getItem("shippingAddress"));
+      if (!saved) return;
+
+      document.getElementById("fullName").value = saved.name || "";
+      document.getElementById("address").value = saved.address || "";
+      document.getElementById("city").value = saved.city || "";
+      document.getElementById("pincode").value = saved.pincode || "";
+      document.getElementById("phone").value = saved.phone || "";
+    }
+
+    showBill();
+    prefillAddress();
+  </script>
+</body>
+</html>

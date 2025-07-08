@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paperly - Stationery Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">📚 Paperly</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="cart.html">🛒 Cart</a></li>
+
+
+
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <h1>Modern Stationery for Creative Minds</h1>
+    <p>Shop smart, write better, stay organized.</p>
+    <button class="shop-btn">Shop Now</button>
+  </section>
+
+  <section id="products" class="product-section">
+    <h2>Our Products</h2>
+    <input type="text" id="searchInput" placeholder="Search products..." />
+    <div class="filters">
+      <button onclick="filterItems('all')">All</button>
+      <button onclick="filterItems('notebooks')">Notebooks</button>
+      <button onclick="filterItems('pens')">Pens</button>
+      <button onclick="filterItems('office')">Office</button>
+    </div>
+    <div class="product-grid" id="productGrid">
+  <div class="product-card" data-category="notebooks">
+  <img src="images/notebook1.jpg" alt="Notebook 1" />
+  <h3>Notebook 1</h3>
+  <p>Category: Notebooks</p>
+  <p>₹60</p>
+  <button onclick="addToCart('Notebook 1', 60)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="notebooks">
+  <img src="images/notebook2.jpg" alt="Notebook 2" />
+  <h3>Notebook 2</h3>
+  <p>Category: Notebooks</p>
+  <p>₹70</p>
+  <button onclick="addToCart('Notebook 2', 70)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="notebooks">
+  <img src="images/notebook3.jpg" alt="Notebook 3" />
+  <h3>Notebook 3</h3>
+  <p>Category: Notebooks</p>
+  <p>₹80</p>
+  <button onclick="addToCart('Notebook 3', 80)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="notebooks">
+  <img src="images/notebook4.jpg" alt="Notebook 4" />
+  <h3>Notebook 4</h3>
+  <p>Category: Notebooks</p>
+  <p>₹90</p>
+  <button onclick="addToCart('Notebook 4', 90)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="notebooks">
+  <img src="images/notebook5.jpg" alt="Notebook 5" />
+  <h3>Notebook 5</h3>
+  <p>Category: Notebooks</p>
+  <p>₹100</p>
+  <button onclick="addToCart('Notebook 5', 100)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen1.jpg" alt="Pen 1" />
+  <h3>Pen 1</h3>
+  <p>Category: Pens</p>
+  <p>₹20</p>
+  <button onclick="addToCart('Pen 1', 20)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen2.jpg" alt="Pen 2" />
+  <h3>Pen 2</h3>
+  <p>Category: Pens</p>
+  <p>₹30</p>
+  <button onclick="addToCart('Pen 2', 30)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen3.jpg" alt="Pen 3" />
+  <h3>Pen 3</h3>
+  <p>Category: Pens</p>
+  <p>₹25</p>
+  <button onclick="addToCart('Pen 3', 25)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen4.jpg" alt="Pen 4" />
+  <h3>Pen 4</h3>
+  <p>Category: Pens</p>
+  <p>₹35</p>
+  <button onclick="addToCart('Pen 4', 35)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen5.jpg" alt="Pen 5" />
+  <h3>Pen 5</h3>
+  <p>Category: Pens</p>
+  <p>₹40</p>
+  <button onclick="addToCart('Pen 5', 40)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="office">
+  <img src="images/office1.jpg" alt="Office Supply 1" />
+  <h3>Stapler</h3>
+  <p>Category: Office</p>
+  <p>₹55</p>
+  <button onclick="addToCart('Stapler', 55)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="office">
+  <img src="images/office2.jpg" alt="Office Supply 2" />
+  <h3>Scissors</h3>
+  <p>Category: Office</p>
+  <p>₹60</p>
+  <button onclick="addToCart('Scissors', 60)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="office">
+  <img src="images/office3.jpg" alt="Office Supply 3" />
+  <h3>Paper Clips</h3>
+  <p>Category: Office</p>
+  <p>₹20</p>
+  <button onclick="addToCart('Paper Clips', 20)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="office">
+  <img src="images/office4.jpg" alt="Office Supply 4" />
+  <h3>Tape Dispenser</h3>
+  <p>Category: Office</p>
+  <p>₹50</p>
+  <button onclick="addToCart('Tape Dispenser', 50)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="office">
+  <img src="images/office5.jpg" alt="Office Supply 5" />
+  <h3>Marker Set</h3>
+  <p>Category: Office</p>
+  <p>₹75</p>
+  <button onclick="addToCart('Marker Set', 75)">Add to Cart</button>
+</div>
+
+<!-- Extra mixed products -->
+<div class="product-card" data-category="notebooks">
+  <img src="images/notebook6.jpg" alt="Notebook 6" />
+  <h3>Notebook 6</h3>
+  <p>Category: Notebooks</p>
+  <p>₹110</p>
+  <button onclick="addToCart('Notebook 6', 110)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen6.jpg" alt="Pen 6" />
+  <h3>Pen 6</h3>
+  <p>Category: Pens</p>
+  <p>₹35</p>
+  <button onclick="addToCart('Pen 6', 35)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="office">
+  <img src="images/office6.jpg" alt="Office Supply 6" />
+  <h3>Highlighter</h3>
+  <p>Category: Office</p>
+  <p>₹30</p>
+  <button onclick="addToCart('Highlighter', 30)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="notebooks">
+  <img src="images/notebook7.jpg" alt="Notebook 7" />
+  <h3>Notebook 7</h3>
+  <p>Category: Notebooks</p>
+  <p>₹120</p>
+  <button onclick="addToCart('Notebook 7', 120)">Add to Cart</button>
+</div>
+
+<div class="product-card" data-category="pens">
+  <img src="images/pen7.jpg" alt="Pen 7" />
+  <h3>Pen 7</h3>
+  <p>Category: Pens</p>
+  <p>₹50</p>
+  <button onclick="addToCart('Pen 7', 50)">Add to Cart</button>
+</div>
+
+</div>
+
+      <!-- Products added by JS -->
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Paperly</h2>
+    <p>We’re passionate about premium-quality stationery and helping creators and professionals express themselves better through writing and design.</p>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: hello@paperly.com</p>
+    <p>Phone: +91-999-888-7777</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Paperly. Built with ❤️ by Aditya.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
